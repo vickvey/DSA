@@ -7,8 +7,8 @@
 #define max(x, y) (x>y?x:y)
 #define min(x, y) (x<y?x:y)
 
-// Quadratic time complexity
-__attribute_maybe_unused__ void naive_getWater(int *arr, int n) {
+// Quadratic time complexity (Naive Solution)
+int naive_getWater(int *arr, int n) {
   int res = 0;
   for(int i = 1; i<n; i++) {
     int lMax = arr[i];
@@ -23,33 +23,25 @@ __attribute_maybe_unused__ void naive_getWater(int *arr, int n) {
   } return res;
 }
 
-int maxWaterTrapped(int *arr, int n) {
-  int amount = 0, i = 0, size;
-  int left_height = arr[0], right_height;
-  enum monotonic_type {
-    inc = 0, dec = 1, equal = 2
-  } condition;
+// Linear time complexity (Efficient Solution)
+int efficient_getWater(int *arr, int n) {
+  int res = 0;
+  int lMax[n], rMax[n];
 
-  // to eat up starting iterations with equal heights
-  while(i < n) {
-    if(arr[i] == arr[++i]) {
-      i++;
-    } else {
-      break;
-    }
+  // pre-compute lMax and rMax for a particular index
+  lMax[0] = arr[0];
+  for(int i = 1; i<n; i++) {
+    lMax[i] = max(arr[i], lMax[i-1]);
+  }
+  rMax[n-1] = arr[n-1];
+  for(int i = n-2; i>=0; i--) {
+    rMax[i] = max(arr[i], rMax[i+1]);
   }
 
-  if(arr[i] < arr[i+1]) {
-    left_height = arr[i];
-    condition = inc;
-    i++;
-  } else {
-    condition = dec;
-    i++;
-  }
-
-  // now checking for the thing
-  // continue from here
+  // calculate the water
+  for(int i = 1; i<n-1; i++) {
+    res = res + (min(lMax[i], rMax[i]) - arr[i]);
+  } return res;
 }
 
 int main() {
@@ -63,6 +55,20 @@ int main() {
   }
 
   // logic of the question
-
+  printf("Naive Solution: %d\n", naive_getWater(arr, n));          // O(n^2)
+  printf("Efficient Solution: %d\n", efficient_getWater(arr, n));  // O(n)
+  // OUTPUT: Naive Solution: 10 
+  //         Efficient Solution: 10
   return 0;
 }
+
+// Extra notes:
+/**
+ * @brief 
+ * The key thing to note here is that water trapped at any element = min(lMax, rMax) - arr[i]) 
+ * where lMax = maximum element on the left of arr[i] including arr[i]
+ *       and rMax = maximum element on the right of arr[i] including arr[i]
+ * 
+ * So, we can pre-compute lMax and rMax for a particular index
+ * 
+ */
