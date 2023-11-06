@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/DSA/06_Array",
-      "program": "/workspaces/DSA/06_Array/build/Debug/outDebug",
+      "cwd": "/workspaces/DSA/12_Linked_List/Singly-Linked-List",
+      "program": "/workspaces/DSA/12_Linked_List/Singly-Linked-List/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
