@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/DSA/06_Array/GOOD_QS",
-      "program": "/workspaces/DSA/06_Array/GOOD_QS/build/Debug/outDebug",
+      "cwd": "/workspaces/DSA/06_Array",
+      "program": "/workspaces/DSA/06_Array/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

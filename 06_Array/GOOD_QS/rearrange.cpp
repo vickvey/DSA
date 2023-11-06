@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+using ll = long long;
 
 // } Driver Code Ends
 class Solution{
@@ -13,18 +14,13 @@ class Solution{
     // arr: input array
     // n: size of array
     //Function to rearrange  the array elements alternately.
-    inline void swap(long long *a, long long *b) {
-        long long temp = *a;
-        *a = *b;
-        *b = temp; 
-    }
     void rearrange(long long *arr, int n) {
-        reverse(arr, arr+n);
+        long long mod = arr[n-1]+1;
 
-        int i = n-1;
-        int curr_front = 1;
-        while(i--) {
-            swap(&arr[i], &arr[curr_front]);
+        long long mid = n/2 + (n%2!=0);
+        for(long long i = 0; i<mid; i++) {
+            long long from = n-i-1;
+            arr[i] = arr[i] * mod + arr[from];
         }
     }
 };
@@ -65,5 +61,4 @@ int main()
     }
 	return 0; 
 } 
-
 // } Driver Code Ends
