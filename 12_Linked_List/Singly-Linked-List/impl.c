@@ -11,7 +11,6 @@ Node *createNode(int data);
 void destroyNode(Node **nodeRef);
 
 void insertAtHead(int data, Node **headRef);
-
 void insertAtTail(int data, Node **headRef);
 void insertAtPosi(int data, int pos, Node **headRef);
 
