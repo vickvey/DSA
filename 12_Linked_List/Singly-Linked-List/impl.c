@@ -12,18 +12,17 @@ void destroyNode(Node **nodeRef);
 
 void insertAtHead(int data, Node **headRef);
 
-// TODO :-----------------------------------------------
 void insertAtTail(int data, Node **headRef);
 void insertAtPosi(int data, int pos, Node **headRef);
 
+// TODO :-----------------------------------------------
 void deleteAtHead(Node **headRef);
 void deleteAtTail(Node **headRef);
 void deleteAtPosi(int pos, Node **headRef);
+//------------------------------------------------------
 
 int countNodes(Node **headRef);
-//-------------------------------------------------------
 void displayList(Node **headRef);
-
 void clearList(Node **headRef);
 
 int main() {
@@ -31,22 +30,56 @@ int main() {
 	struct Node *head = NULL;
 	
 	displayList(&head); // O/P : Empty list
+        printf("The number of nodes are : %d\n", countNodes(&head));
 
 	insertAtHead(10, &head);
 	displayList(&head); // O/P : 10 -> NULL
-	
+        printf("The number of nodes are : %d\n", countNodes(&head));
+
 	insertAtHead(5, &head);
 	displayList(&head); // O/P : 5 -> 10 -> NULL
+        printf("The number of nodes are : %d\n", countNodes(&head));
 	
 	insertAtHead(3, &head);
 	insertAtHead(1, &head);
 	
 	displayList(&head); // O/P : 1 -> 3 -> 5 -> 10 -> NULL
+        printf("The number of nodes are : %d\n", countNodes(&head));
 	
 	clearList(&head);
 	puts("ListClearing is successfull");
 	displayList(&head); // O/P : Empty list
+	printf("The number of nodes are : %d\n", countNodes(&head));
 
+	insertAtTail(10, &head);
+	displayList(&head); // O/P : 10 -> NULL
+        printf("The number of nodes are : %d\n", countNodes(&head));
+	
+	insertAtTail(20, &head);
+	displayList(&head); // O/P : 10 -> 20 -> NULL
+        printf("The number of nodes are : %d\n", countNodes(&head));
+
+	while(1) {
+		int data = 0;
+		puts("Enter the data you want to be inserted : ");
+		scanf("%d", &data);
+
+		int pos = 0;
+		puts("Enter the position at which you want the data to be inserted : ");
+		scanf("%d", &pos);
+
+		insertAtPosi(data, pos, &head);
+		displayList(&head);
+		printf("The number of nodes are : %d\n", countNodes(&head));
+
+		int prompt = 0;
+		puts("Enter 1 to continue or else enter any key to exit");
+		scanf("%d", &prompt);
+
+		if(prompt != 1) break;
+	}
+	clearList(&head);
+	displayList(&head);
 	return 0;
 }
 
@@ -89,6 +122,79 @@ void displayList(Node **headRef) {
 		curr = curr->next;
 	} 
 	printf("NULL\n");
+}
+
+int countNodes(Node **headRef) {
+	if(headRef == NULL) return -1;
+	if(*headRef == NULL) return 0;
+	
+	// here size of list is >= 1
+	int count = 1;
+	Node *curr = *headRef;
+	while(curr->next != NULL) {
+		curr = curr->next;
+		count++;
+	}
+	return count;
+}
+
+// TODO 
+
+void insertAtPosi(int data, int pos, Node **headRef) {
+	if(headRef == NULL) return;
+	if(*headRef == NULL) {
+		*headRef = createNode(data);
+		return;
+	}
+	// here list size is >= 1
+	if((*headRef)->next == NULL) {
+		if(pos <= 1) {
+			insertAtHead(data, headRef);
+		} else {
+			insertAtTail(data, headRef);
+		}
+		return;
+	}
+
+	// here list size is >= 2
+	if(pos <= 1) {
+		insertAtHead(data, headRef);
+		return;
+	}
+	puts("checkpoint 1");
+	// here pos >= 2
+	int curr = 1;
+	Node *it = *headRef;
+
+	// here list size is >= 2
+	while(it->next != NULL && curr != pos-1) {
+		it = it->next;
+		curr++;
+		printf("curr : %d\n", curr);
+		printf("curr->data : %d\n", it->data);
+	}
+	puts("checkpoint 2");
+	if(it->next == NULL) {
+		// handling the case where position to insert is greater than list size
+		it->next = createNode(data);
+		return;
+	}
+	puts("checkpoint 3");
+	// insertion is always between two nodes
+	Node *temp = createNode(data);
+	temp->next = it->next;
+	it->next = temp;
+}
+
+void insertAtTail(int data, Node **headRef) {
+	if(headRef == NULL) return;
+	if(*headRef == NULL) {
+		*headRef = createNode(data);
+		return;
+	}
+	Node *curr = *headRef;
+	while(curr->next != NULL) curr = curr->next;
+	curr->next = createNode(data);
 }
 
 void insertAtHead(int data, Node **headRef) {
