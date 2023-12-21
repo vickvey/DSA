@@ -15,12 +15,23 @@ int first_occ(int key, int n, const int arr[]) {
 
     while(lo <= hi) {
         int mid = lo + (hi - lo)/2;
-        
+        if(arr[mid] == key && (mid == 0 || arr[mid-1] != key)) return mid;
+        else if (arr[mid] > key) lo = mid + 1;
+        else hi = mid - 1;
     }
+    return -1;
 }
 
 void solve() {
     // question here
+    int n = 0, key = 0;
+    cin >> n >> key;
+
+    int arr[n];
+    for(auto& x: arr) cin >> x;
+
+    cout << "The first occurence of " << key << " is at index "
+         << first_occ(key, n, arr) << endl;
 }
 
 int main() {
