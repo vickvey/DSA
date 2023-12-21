@@ -15,9 +15,13 @@ int first_occ(int key, int n, const int arr[]) {
 
     while(lo <= hi) {
         int mid = lo + (hi - lo)/2;
-        if(arr[mid] == key && (mid == 0 || arr[mid-1] != key)) return mid;
-        else if (arr[mid] > key) lo = mid + 1;
-        else hi = mid - 1;
+        if (arr[mid] > key) hi = mid - 1;
+        else if (arr[mid] < key) lo = mid + 1;
+
+        else {
+            if(mid == 0 || arr[mid-1] != arr[mid]) return mid;
+            else hi = mid - 1;
+        }
     }
     return -1;
 }
