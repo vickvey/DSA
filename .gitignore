@@ -1,1 +1,3 @@
 .vscode/
+.gitignore
+/07_Binary_Search/gfg-lectures-questions/.cph/

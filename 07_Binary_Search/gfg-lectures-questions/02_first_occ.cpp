@@ -30,8 +30,7 @@ void solve() {
     int arr[n];
     for(auto& x: arr) cin >> x;
 
-    cout << "The first occurence of " << key << " is at index "
-         << first_occ(key, n, arr) << endl;
+    cout << first_occ(key, n, arr) << endl;
 }
 
 int main() {
