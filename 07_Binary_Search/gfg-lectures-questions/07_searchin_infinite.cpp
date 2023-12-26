@@ -6,7 +6,6 @@ const int MOD = 1e9 + 7;
 #define min(x, y) (x < y ? x : y)
 /////////////////////////////////////////////////////////////////////
 
-
 // code here
 
 int binarySearch(int arr[], int x, int lo, int hi) {
