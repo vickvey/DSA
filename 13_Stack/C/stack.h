@@ -21,6 +21,7 @@ void destroy_stack(stack *stack_ref);
 void push(stack *stack_ref, _DATATYPE data);
 _DATATYPE pop(stack *stack_ref);
 _DATATYPE front(stack *stack_ref);
+int is_empty(stack *stack_ref);
 int is_full(stack *stack_ref);
 int count_elems(stack *stack_ref);
 
