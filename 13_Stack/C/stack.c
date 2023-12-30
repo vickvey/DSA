@@ -40,19 +40,15 @@ static void resize_stack(stack *stack_ref) {
 }
 
 void create_stack(stack *stack_ref) {
+    // Check for a null pointer
     if (stack_ref == NULL) {
         fprintf(stderr, "Error: Null pointer passed to create_stack at %s:%d\n", __FILE__, __LINE__);
         exit(EXIT_FAILURE);
     }
 
-    if (stack_ref->array != NULL) {
-        fprintf(stderr, "Error: Attempt to create an already initialized stack at %s:%d\n", __FILE__, __LINE__);
-        exit(EXIT_FAILURE);
-    }
- 
+    // Initialize the stack
     stack_ref->capacity = STACK_CAPACITY_INIT;
-    stack_ref->array = 
-        (_DATATYPE *) malloc(stack_ref->capacity * sizeof(_DATATYPE));
+    stack_ref->array = (_DATATYPE *) malloc(stack_ref->capacity * sizeof(_DATATYPE));
 
     // Verify memory allocation
     CHECK_ALLOC(stack_ref->array);

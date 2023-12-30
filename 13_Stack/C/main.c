@@ -22,6 +22,10 @@ int main() {
     pop(&st);
     printf("The data at top now is : %d\n", front(&st));
 
+    printf("The data at top is used and popped : %d!\n", pop(&st));
+
+    printf("The data at top now is : %d!\n", front(&st));
+
     // Destroy the stack
     destroy_stack(&st);
     return 0;
